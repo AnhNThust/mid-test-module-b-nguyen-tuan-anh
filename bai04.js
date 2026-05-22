@@ -14,15 +14,30 @@ function findSecondLargestNumber(arr) {
     if (arr[i] > max) {
       second = max;
       max = arr[i];
-    } else if (arr[i] > second) {
+    } else if (arr[i] > second && arr[i] < max) {
       second = arr[i];
     }
   }
-  return second;
+  return second === max ? null : second;
 }
 
-console.log(findSecondLargestNumber([1, 2, 3, 4, 5, 6, 7]));
-console.log(findSecondLargestNumber([10, 12, 3, 14, 25, 6, 7]));
-console.log(findSecondLargestNumber([10]));
-console.log(findSecondLargestNumber([12, 11]));
-console.log(findSecondLargestNumber([]));
+function findSecondLargestNumber2(arr) {
+  if (!Array.isArray(arr) || arr.length === 0) return "Invalid";
+
+  const newArr = arr.reduce((acc, cur) => {
+    if (!acc.includes(cur)) acc.push(cur);
+    return acc;
+  }, []);
+  newArr.sort((a, b) => b - a);
+
+  if (newArr.length < 2) return null;
+  return newArr[1];
+}
+
+console.log(findSecondLargestNumber2([1, 2, 3, 4, 5, 6, 7])); // 6
+console.log(findSecondLargestNumber2([10, 12, 3, 14, 25, 6, 7])); // 14
+console.log(findSecondLargestNumber2([10])); // null
+console.log(findSecondLargestNumber2([12, 11])); // 11
+console.log(findSecondLargestNumber2([])); // Invalid
+console.log(findSecondLargestNumber2([1, 1])); // null
+console.log(findSecondLargestNumber2([1, -1, 2, 2, , , , ,])); // 1

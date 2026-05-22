@@ -34,10 +34,14 @@ function flattenArrayToHTML(arr) {
   arr.reduce((acc, cur) => {
     let numOfPrefix = cur.name.split(".").length;
 
-    if (!cur.children) {
-      document.write(`<option value\"${cur.id}\">${prefix.repeat(numOfPrefix - 1)}${cur.name}</option>`);
-    } else {
-      document.write(`<option value\"${cur.id}\">${prefix.repeat(numOfPrefix - 1)}${cur.name}</option>`);
+    // if (!cur.children) {
+    //   document.write(`<option value=\"${cur.id}\">${prefix.repeat(numOfPrefix - 1)}${cur.name}</option>`);
+    // } else {
+    //   document.write(`<option value=\"${cur.id}\">${prefix.repeat(numOfPrefix - 1)}${cur.name}</option>`);
+    //   flattenArrayToHTML(cur.children);
+    // }
+    document.write(`<option value=\"${cur.id}\">${prefix.repeat(numOfPrefix - 1)}${cur.name}</option>`);
+    if (cur.children) {
       flattenArrayToHTML(cur.children);
     }
   }, []);
